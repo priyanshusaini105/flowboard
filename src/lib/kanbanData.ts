@@ -234,16 +234,16 @@ export function rollbackTaskInData(
 }
 
 export const PROJECT_COLORS: Record<string, string> = {
-  fuchsia: 'rt:bg-fuchsia-700/40 rt:text-fuchsia-300',
-  blue: 'rt:bg-blue-700/40 rt:text-blue-300',
-  purple: 'rt:bg-purple-700/40 rt:text-purple-300',
-  green: 'rt:bg-green-700/40 rt:text-green-300',
-  orange: 'rt:bg-orange-700/40 rt:text-orange-300',
-  cyan: 'rt:bg-cyan-700/40 rt:text-cyan-300',
-  violet: 'rt:bg-violet-700/40 rt:text-violet-300',
-  red: 'rt:bg-red-700/40 rt:text-red-300',
-  yellow: 'rt:bg-yellow-700/40 rt:text-yellow-300',
-  pink: 'rt:bg-pink-700/40 rt:text-pink-300',
+  fuchsia: 'bg-fuchsia-100 text-fuchsia-800 dark:bg-fuchsia-700/40 dark:text-fuchsia-300',
+  blue: 'bg-blue-100 text-blue-800 dark:bg-blue-700/40 dark:text-blue-300',
+  purple: 'bg-purple-100 text-purple-800 dark:bg-purple-700/40 dark:text-purple-300',
+  green: 'bg-green-100 text-green-800 dark:bg-green-700/40 dark:text-green-300',
+  orange: 'bg-orange-100 text-orange-800 dark:bg-orange-700/40 dark:text-orange-300',
+  cyan: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-700/40 dark:text-cyan-300',
+  violet: 'bg-violet-100 text-violet-800 dark:bg-violet-700/40 dark:text-violet-300',
+  red: 'bg-red-100 text-red-800 dark:bg-red-700/40 dark:text-red-300',
+  yellow: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-700/40 dark:text-yellow-300',
+  pink: 'bg-pink-100 text-pink-800 dark:bg-pink-700/40 dark:text-pink-300',
 };
 
 export const STATUS_MAP: Record<
@@ -251,22 +251,26 @@ export const STATUS_MAP: Record<
   { className: string; text: string; icon: string }
 > = {
   blocked: {
-    className: 'rt:bg-red-900/50 rt:text-red-300 rt:border-red-800/60',
+    className:
+      'bg-red-100 text-red-800 border-red-200 dark:bg-red-900/50 dark:text-red-300 dark:border-red-800/60',
     text: 'Blocked',
     icon: 'fas fa-ban',
   },
   paused: {
-    className: 'rt:bg-yellow-900/50 rt:text-yellow-300 rt:border-yellow-800/60',
+    className:
+      'bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-yellow-900/50 dark:text-yellow-300 dark:border-yellow-800/60',
     text: 'Paused',
     icon: 'fas fa-pause',
   },
   cancelled: {
-    className: 'rt:bg-gray-900/50 rt:text-gray-400 rt:border-gray-800/60',
+    className:
+      'bg-gray-100 text-gray-700 border-gray-200 dark:bg-gray-900/50 dark:text-gray-400 dark:border-gray-800/60',
     text: 'Cancelled',
     icon: 'fas fa-times',
   },
   done: {
-    className: 'rt:bg-green-900/50 rt:text-green-300 rt:border-green-800/60',
+    className:
+      'bg-green-100 text-green-800 border-green-200 dark:bg-green-900/50 dark:text-green-300 dark:border-green-800/60',
     text: 'Done',
     icon: 'fas fa-check',
   },

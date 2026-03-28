@@ -60,38 +60,38 @@ export default function AddProjectModal({ open, onAdd, onClose }: AddProjectModa
       }}
     >
       <div className="modal-content">
-        <div className="rt:flex rt:items-center rt:justify-between rt:mb-4">
-          <h2 className="rt:text-lg rt:font-semibold rt:text-zinc-100">New Project</h2>
-          <button onClick={onClose} className="rt:text-zinc-400 rt:hover:text-zinc-200">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-foreground">New Project</h2>
+          <button onClick={onClose} className="text-muted-foreground hover:text-foreground">
             <i className="fas fa-times" />
           </button>
         </div>
 
         {error && (
-          <div className="rt:mb-3 rt:p-2 rt:bg-red-900/30 rt:border rt:border-red-800/50 rt:rounded-md rt:text-sm rt:text-red-300">
+          <div className="mb-3 p-2 bg-destructive/10 border border-destructive/30 rounded-md text-sm text-destructive">
             {error}
           </div>
         )}
 
         <form onSubmit={handleSubmit}>
-          <div className="rt:space-y-3">
+          <div className="space-y-3">
             <div>
-              <label className="rt:block rt:text-sm rt:text-zinc-300 rt:mb-1">Project Name *</label>
+              <label className="block text-sm text-muted-foreground mb-1">Project Name *</label>
               <input
                 ref={inputRef}
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="rt:w-full rt:px-3 rt:py-2 rt:bg-zinc-800 rt:border rt:border-zinc-700 rt:rounded-md rt:text-sm rt:text-zinc-100 rt:focus:outline-none rt:focus:border-blue-500"
+                className="w-full px-3 py-2 bg-background border border-border rounded-md text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 placeholder="Enter project name"
               />
             </div>
             <div>
-              <label className="rt:block rt:text-sm rt:text-zinc-300 rt:mb-1">Color</label>
+              <label className="block text-sm text-muted-foreground mb-1">Color</label>
               <select
                 value={color}
                 onChange={(e) => setColor(e.target.value)}
-                className="rt:w-full rt:px-3 rt:py-2 rt:bg-zinc-800 rt:border rt:border-zinc-700 rt:rounded-md rt:text-sm rt:text-zinc-100 rt:focus:outline-none rt:focus:border-blue-500"
+                className="w-full px-3 py-2 bg-background border border-border rounded-md text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
               >
                 {COLORS.map((c) => (
                   <option key={c.value} value={c.value}>
@@ -101,17 +101,17 @@ export default function AddProjectModal({ open, onAdd, onClose }: AddProjectModa
               </select>
             </div>
           </div>
-          <div className="rt:flex rt:justify-end rt:gap-2 rt:mt-4">
+          <div className="flex justify-end gap-2 mt-4">
             <button
               type="button"
               onClick={onClose}
-              className="rt:px-4 rt:py-2 rt:text-sm rt:text-zinc-300 rt:hover:bg-zinc-800 rt:rounded-md"
+              className="px-4 py-2 text-sm text-muted-foreground hover:bg-muted rounded-md"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="rt:px-4 rt:py-2 rt:text-sm rt:bg-blue-600 rt:text-white rt:hover:bg-blue-700 rt:rounded-md rt:font-medium"
+              className="px-4 py-2 text-sm bg-primary text-primary-foreground hover:bg-primary/90 rounded-md font-medium"
             >
               Create Project
             </button>

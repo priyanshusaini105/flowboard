@@ -36,20 +36,20 @@ export default function ConfirmDialog({
 
   return (
     <div
-      className="rt:fixed rt:inset-0 rt:z-[120] rt:bg-black/60 rt:backdrop-blur-sm rt:flex rt:items-center rt:justify-center rt:p-4"
+      className="fixed inset-0 z-[120] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
       onClick={(e) => {
         if (e.target === e.currentTarget) onCancel();
       }}
       onKeyDown={handleKeyDown}
     >
-      <div className="rt:w-full rt:max-w-md rt:rounded-xl rt:border rt:border-zinc-700 rt:bg-zinc-900 rt:shadow-2xl rt:p-5">
-        <h3 className="rt:text-lg rt:font-semibold rt:text-zinc-100">{title}</h3>
-        <p className="rt:mt-2 rt:text-sm rt:text-zinc-300 rt:leading-relaxed">{description}</p>
-        <div className="rt:mt-5 rt:flex rt:items-center rt:justify-end rt:gap-2">
+      <div className="w-full max-w-md rounded-xl border border-border bg-background shadow-2xl p-5">
+        <h3 className="text-lg font-semibold text-foreground">{title}</h3>
+        <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{description}</p>
+        <div className="mt-5 flex items-center justify-end gap-2">
           {variant === 'confirm' && (
             <button
               type="button"
-              className="rt:inline-flex rt:items-center rt:justify-center rt:rounded-md rt:border rt:border-zinc-600 rt:bg-zinc-800 rt:px-3 rt:py-2 rt:text-sm rt:font-medium rt:text-zinc-200 rt:hover:bg-zinc-700"
+              className="inline-flex items-center justify-center rounded-md border border-border bg-muted px-3 py-2 text-sm font-medium text-foreground hover:bg-muted/80"
               onClick={onCancel}
             >
               {cancelText}
@@ -57,7 +57,7 @@ export default function ConfirmDialog({
           )}
           <button
             type="button"
-            className="rt:inline-flex rt:items-center rt:justify-center rt:rounded-md rt:bg-blue-600 rt:px-3 rt:py-2 rt:text-sm rt:font-medium rt:text-white rt:hover:bg-blue-700"
+            className="inline-flex items-center justify-center rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
             onClick={onConfirm}
           >
             {confirmText}

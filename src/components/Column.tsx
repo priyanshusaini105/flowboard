@@ -77,12 +77,12 @@ export default function Column({
   }, [onMoveTask]);
 
   return (
-    <div className="rt:flex-1 rt:min-w-[280px]">
+    <div className="flex-1 min-w-[280px]">
       {/* Column header */}
-      <div className="rt:flex rt:items-center rt:justify-between rt:mb-3 rt:px-2">
-        <div className="rt:flex rt:items-center rt:gap-2">
-          <h2 className="rt:text-sm rt:font-semibold rt:text-zinc-200">{column.title}</h2>
-          <span className="rt:text-xs rt:text-zinc-400 rt:bg-zinc-800 rt:rounded-full rt:px-2 rt:py-0.5">
+      <div className="flex items-center justify-between mb-3 px-2">
+        <div className="flex items-center gap-2">
+          <h2 className="text-sm font-semibold text-foreground">{column.title}</h2>
+          <span className="text-xs text-muted-foreground bg-muted rounded-full px-2 py-0.5">
             {tasks.length}
           </span>
         </div>
@@ -92,7 +92,7 @@ export default function Column({
       <div
         ref={listRef}
         data-kanban-column={column.id}
-        className="kanban-column custom-scrollbar rt:space-y-2 rt:min-h-[100px] rt:rounded-lg rt:bg-zinc-900/50 rt:border rt:border-zinc-800/50 rt:p-2"
+        className="kanban-column custom-scrollbar space-y-2 min-h-[100px] rounded-lg bg-card/70 border border-border p-2"
       >
         {tasks.map((task) => (
           <TaskCard

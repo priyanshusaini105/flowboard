@@ -1,4 +1,4 @@
-@import "tailwindcss" prefix(rt);
+@import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
@@ -99,8 +99,9 @@
 }
 
 .modal-content {
-  background: #18181b;
-  border: 1px solid #3f3f46;
+  background: var(--background);
+  color: var(--foreground);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 24px;
   max-width: 500px;
@@ -249,39 +250,79 @@ textarea:focus {
   }
 }
 
-/* Light theme */
+/* Light theme overrides */
+html[data-theme='light'] {
+  /* shadcn sidebar tokens for light mode */
+  --sidebar: oklch(0.974 0.004 266);
+  --sidebar-foreground: oklch(0.25 0.01 266);
+  --sidebar-primary: oklch(0.47 0.15 266);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.93 0.006 266);
+  --sidebar-accent-foreground: oklch(0.25 0.01 266);
+  --sidebar-border: oklch(0.88 0.006 266);
+  --sidebar-ring: oklch(0.65 0.01 266);
+
+  --background: oklch(0.97 0.003 266);
+  --foreground: oklch(0.18 0.012 266);
+  --muted: oklch(0.94 0.005 266);
+  --muted-foreground: oklch(0.48 0.01 266);
+  --border: oklch(0.88 0.006 266);
+}
+
 html[data-theme='light'] body {
+  background: #f5f7fb;
+  color: #1e293b;
+}
+
+html[data-theme='light'] .modal-content input,
+html[data-theme='light'] .modal-content select,
+html[data-theme='light'] .modal-content textarea {
   background: #f8fafc;
-  color: #0f172a;
+  color: #1e293b;
+  border-color: #cbd5e1;
 }
 
-html[data-theme='light'] aside,
-html[data-theme='light'] main {
-  background: #f8fafc !important;
-  color: #0f172a !important;
-  border-color: #e2e8f0 !important;
+html[data-theme='light'] .modal-content label,
+html[data-theme='light'] .modal-content h2,
+html[data-theme='light'] .modal-content h3,
+html[data-theme='light'] .modal-content p {
+  color: #1e293b;
 }
 
-html[data-theme='light'] .task-card,
-html[data-theme='light'] .modal-content,
 html[data-theme='light'] .status-menu {
-  background: #ffffff !important;
-  color: #0f172a !important;
-  border-color: #e2e8f0 !important;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  color: #1e293b;
 }
 
-html[data-theme='light'] .project-item,
+html[data-theme='light'] .task-card {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  color: #1e293b;
+}
+
+html[data-theme='light'] .task-card h3 {
+  color: #1e293b;
+}
+
 html[data-theme='light'] [data-kanban-column] {
-  background: #f1f5f9 !important;
+  background: #eef2f8;
+  border-color: #e2e8f0;
+}
+
+html[data-theme='light'] .project-item {
+  background: transparent;
 }
 
 html[data-theme='light'] .custom-scrollbar::-webkit-scrollbar-track {
-  background: #e2e8f0 !important;
+  background: #e2e8f0;
 }
 
 html[data-theme='light'] .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #94a3b8 !important;
+  background: #94a3b8;
 }
+
 
 @theme inline {
   --font-heading: var(--font-sans);
@@ -397,12 +438,11 @@ html[data-theme='light'] .custom-scrollbar::-webkit-scrollbar-thumb {
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    border-color: var(--color-border);
+    outline-color: color-mix(in oklch, var(--color-ring), transparent 50%);
   }
   body {
-    @apply bg-background text-foreground;
-  }
-  html {
-    @apply font-sans;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
   }
 }

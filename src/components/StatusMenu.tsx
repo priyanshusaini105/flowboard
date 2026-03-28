@@ -29,13 +29,13 @@ export default function StatusMenu({ taskId, anchorRect, onSelect, onClose }: St
   return (
     <div
       ref={menuRef}
-      className="status-menu rt:absolute rt:z-50 rt:bg-zinc-800 rt:border rt:border-zinc-700 rt:rounded-lg rt:shadow-lg rt:p-1 rt:min-w-[120px]"
+      className="status-menu absolute z-50 bg-popover border border-border rounded-lg shadow-lg p-1 min-w-[140px]"
       style={{ left: anchorRect.left, top: anchorRect.bottom + 5 }}
     >
       {AVAILABLE_STATUSES.map((status) => (
         <button
           key={status.value}
-          className="rt:w-full rt:text-left rt:px-2 rt:py-1.5 rt:text-xs rt:rounded rt:hover:bg-zinc-700 rt:text-zinc-300 rt:flex rt:items-center rt:gap-2"
+          className="w-full text-left px-2 py-1.5 text-xs rounded hover:bg-accent text-popover-foreground flex items-center gap-2"
           onClick={() => {
             onSelect(taskId, status.value || null);
             onClose();

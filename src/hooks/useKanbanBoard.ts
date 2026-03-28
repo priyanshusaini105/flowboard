@@ -157,9 +157,14 @@ export function useKanbanBoard(showNotification: (msg: string, type: 'success' |
       );
       if (exists) return false;
 
+      const uid =
+        typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
+          ? crypto.randomUUID()
+          : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+
       newData.projects = [
         ...newData.projects,
-        { id: name.toLowerCase().replace(/\s+/g, '-'), name, starred: false, color },
+        { id: `proj-${uid}`, name, starred: false, color },
       ];
       persist(newData);
       return true;
@@ -207,7 +212,10 @@ export function useKanbanBoard(showNotification: (msg: string, type: 'success' |
 
   const moveTaskOptimistic = useCallback(
     async (taskId: string, fromColumnId: string, toColumnId: string) => {
-      const snapshot = { ...dataRef.current };
+      const snapshot: KanbanData =
+        typeof structuredClone === 'function'
+          ? structuredClone(dataRef.current)
+          : JSON.parse(JSON.stringify(dataRef.current));
       const result = moveTaskInData(snapshot, taskId, fromColumnId, toColumnId);
       if (!result) return;
 

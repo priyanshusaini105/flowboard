@@ -3,6 +3,7 @@ import '../src/styles.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -20,14 +21,16 @@ const themeScript = `
     var t = localStorage.getItem('kanban-theme-mode');
     if (t === 'light' || t === 'dark') {
       document.documentElement.setAttribute('data-theme', t);
-      if (t === 'dark') document.documentElement.classList.add('rt:dark');
+      if (t === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
     } else {
       document.documentElement.setAttribute('data-theme', 'dark');
-      document.documentElement.classList.add('rt:dark');
+      document.documentElement.classList.add('dark');
     }
   } catch(e) {
     document.documentElement.setAttribute('data-theme', 'dark');
-    document.documentElement.classList.add('rt:dark');
+    document.documentElement.classList.add('dark');
   }
 })();
 `;
@@ -43,7 +46,7 @@ export default function RootLayout({
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body>{children}</body>
+      <body><TooltipProvider>{children}</TooltipProvider></body>
     </html>
   );
 }

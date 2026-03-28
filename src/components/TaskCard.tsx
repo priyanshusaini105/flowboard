@@ -11,75 +11,75 @@ interface TaskCardProps {
 }
 
 export default function TaskCard({ task, isMoving, onStatusClick, onArchive }: TaskCardProps) {
-  const projectColorClass = PROJECT_COLORS[task.projectColor] || 'rt:bg-gray-700/40 rt:text-gray-300';
+  const projectColorClass = PROJECT_COLORS[task.projectColor] || 'bg-gray-700/40 text-gray-300';
   const statusInfo = task.status ? STATUS_MAP[task.status] : null;
 
   return (
     <article
       data-kanban-task="true"
       data-task-id={task.id}
-      className={`task-card rt:mx-2 rt:rounded-lg rt:border rt:border-zinc-800 rt:bg-zinc-800/60 rt:p-3 rt:shadow-sm rt:hover:border-zinc-700 fade-in-up ${
-        isMoving ? 'rt:opacity-60' : ''
+      className={`task-card mx-2 rounded-lg border border-border bg-card p-3 shadow-sm hover:border-ring/40 fade-in-up ${
+        isMoving ? 'opacity-60' : ''
       }`}
     >
       {/* Status row */}
-      <div className="rt:mb-2 rt:flex rt:items-center rt:justify-between">
+      <div className="mb-2 flex items-center justify-between">
         {statusInfo ? (
           <button
-            className={`rt:inline-flex rt:items-center rt:gap-1 rt:rounded rt:border ${statusInfo.className} rt:px-2 rt:py-0.5 rt:text-[10px] rt:font-medium rt:cursor-pointer rt:hover:opacity-80 rt:transition-opacity rt:flex-shrink-0`}
+            className={`inline-flex items-center gap-1 rounded border ${statusInfo.className} px-2 py-0.5 text-[10px] font-medium cursor-pointer hover:opacity-80 transition-opacity flex-shrink-0`}
             onClick={(e) => onStatusClick(task.id, e.currentTarget.getBoundingClientRect())}
           >
-            <i className={`${statusInfo.icon} rt:text-xs`} />
+            <i className={`${statusInfo.icon} text-xs`} />
             {statusInfo.text}
           </button>
         ) : (
           <button
-            className="rt:inline-flex rt:items-center rt:gap-1 rt:rounded rt:border rt:bg-zinc-800/60 rt:text-zinc-400 rt:border-zinc-700/60 rt:px-2 rt:py-0.5 rt:text-[10px] rt:font-medium rt:cursor-pointer rt:hover:bg-zinc-700/60 rt:transition-colors rt:flex-shrink-0"
+            className="inline-flex items-center gap-1 rounded border bg-muted text-muted-foreground border-border px-2 py-0.5 text-[10px] font-medium cursor-pointer hover:bg-accent transition-colors flex-shrink-0"
             onClick={(e) => onStatusClick(task.id, e.currentTarget.getBoundingClientRect())}
           >
-            <i className="fas fa-plus rt:text-xs" />
+            <i className="fas fa-plus text-xs" />
             Status
           </button>
         )}
         <button
           onClick={() => onArchive(task.id)}
-          className="rt:p-1 rt:hover:bg-red-700/20 rt:hover:text-red-400 rt:rounded rt:transition-all rt:duration-200 rt:flex-shrink-0"
+          className="p-1 hover:bg-red-700/20 hover:text-red-400 rounded transition-all duration-200 flex-shrink-0"
           title="Archive task"
         >
-          <i className="fas fa-archive rt:text-zinc-500 rt:hover:text-red-400 rt:text-sm" />
+          <i className="fas fa-archive text-muted-foreground hover:text-red-400 text-sm" />
         </button>
       </div>
 
       {/* Title */}
-      <header className="rt:flex rt:items-start rt:justify-between">
+      <header className="flex items-start justify-between">
         <h3
-          className="rt:text-sm rt:font-medium rt:pr-2 break-words-force rt:min-w-0 rt:flex-1"
+          className="text-sm font-medium pr-2 break-words-force min-w-0 flex-1"
           title={task.title}
         >
           {task.title}
         </h3>
         {task.time && (
-          <span className="rt:text-[11px] rt:text-zinc-400 rt:flex-shrink-0">{task.time}</span>
+          <span className="text-[11px] text-muted-foreground flex-shrink-0">{task.time}</span>
         )}
       </header>
 
       {/* Footer */}
-      <footer className="rt:mt-2 rt:flex rt:items-center rt:justify-between">
-        <div className="rt:flex rt:items-center rt:gap-2 rt:min-w-0 rt:flex-1">
+      <footer className="mt-2 flex items-center justify-between">
+        <div className="flex items-center gap-2 min-w-0 flex-1">
           <img
-            className="rt:h-5 rt:w-5 rt:rounded-full rt:flex-shrink-0"
+            className="h-5 w-5 rounded-full flex-shrink-0"
             src={task.avatar}
             alt={task.assignee}
           />
           <span
-            className="task-assignee rt:text-xs rt:text-zinc-300 rt:truncate"
+            className="task-assignee text-xs text-muted-foreground truncate"
             title={task.assignee}
           >
             {task.assignee}
           </span>
         </div>
         <span
-          className={`task-project rt:rounded ${projectColorClass} rt:px-2 rt:py-0.5 rt:text-[11px] rt:truncate rt:max-w-24`}
+          className={`task-project rounded ${projectColorClass} px-2 py-0.5 text-[11px] truncate max-w-24`}
           title={task.project}
         >
           {task.project}

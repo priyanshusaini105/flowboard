@@ -7,6 +7,7 @@ import ConfirmDialog from './ConfirmDialog';
 interface AddTaskModalProps {
   open: boolean;
   projects: Project[];
+  activeProjectId?: string | null;
   onAdd: (
     columnId: string,
     taskData: {
@@ -21,10 +22,16 @@ interface AddTaskModalProps {
   onClose: () => void;
 }
 
-export default function AddTaskModal({ open, projects, onAdd, onClose }: AddTaskModalProps) {
+export default function AddTaskModal({
+  open,
+  projects,
+  activeProjectId = null,
+  onAdd,
+  onClose,
+}: AddTaskModalProps) {
   const [title, setTitle] = useState('');
   const [assignee, setAssignee] = useState('');
-  const [project, setProject] = useState(projects[0]?.id || '');
+  const [project, setProject] = useState('');
   const [time, setTime] = useState('');
   const [column, setColumn] = useState('todo');
   const [status, setStatus] = useState('');
@@ -37,16 +44,34 @@ export default function AddTaskModal({ open, projects, onAdd, onClose }: AddTask
     }
   }, [open]);
 
+  useEffect(() => {
+    const hasActiveProject = !!activeProjectId && projects.some((p) => p.id === activeProjectId);
+    if (open && hasActiveProject) {
+      setProject(activeProjectId as string);
+      return;
+    }
+
+    if (!project || !projects.some((p) => p.id === project)) {
+      setProject(projects[0]?.id || '');
+    }
+  }, [open, activeProjectId, projects, project]);
+
+  const isProjectLocked = !!activeProjectId && projects.some((p) => p.id === activeProjectId);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim()) {
       setError('Please enter a task title');
       return;
     }
+
+    const selectedProjectId =
+      project || (activeProjectId && projects.some((p) => p.id === activeProjectId) ? activeProjectId : '') || projects[0]?.id || '';
+
     onAdd(column, {
       title: title.trim(),
       assignee: assignee.trim() || 'Unassigned',
-      project,
+      project: selectedProjectId,
       time: time.trim(),
       status: status || undefined,
       avatar: 'https://picsum.photos/20?' + Date.now(),
@@ -55,13 +80,16 @@ export default function AddTaskModal({ open, projects, onAdd, onClose }: AddTask
     setAssignee('');
     setTime('');
     setStatus('');
+    if (isProjectLocked && activeProjectId) {
+      setProject(activeProjectId);
+    }
     setError('');
     onClose();
   };
 
   const inputClass =
-    'rt:w-full rt:px-3 rt:py-2 rt:bg-zinc-800 rt:border rt:border-zinc-700 rt:rounded-md rt:text-sm rt:text-zinc-100 rt:focus:outline-none rt:focus:border-blue-500';
-  const labelClass = 'rt:block rt:text-sm rt:text-zinc-300 rt:mb-1';
+    'w-full px-3 py-2 bg-background border border-border rounded-md text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring';
+  const labelClass = 'block text-sm text-muted-foreground mb-1';
 
   return (
     <>
@@ -80,13 +108,13 @@ export default function AddTaskModal({ open, projects, onAdd, onClose }: AddTask
           }}
         >
           <div className="modal-content">
-            <div className="rt:flex rt:items-center rt:justify-between rt:mb-4">
-              <h2 className="rt:text-lg rt:font-semibold rt:text-zinc-100">New Task</h2>
-              <button onClick={onClose} className="rt:text-zinc-400 rt:hover:text-zinc-200">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold text-foreground">New Task</h2>
+              <button onClick={onClose} className="text-muted-foreground hover:text-foreground">
                 <i className="fas fa-times" />
               </button>
             </div>
-            <form onSubmit={handleSubmit} className="rt:space-y-3">
+            <form onSubmit={handleSubmit} className="space-y-3">
               <div>
                 <label className={labelClass}>Title *</label>
                 <input
@@ -114,6 +142,7 @@ export default function AddTaskModal({ open, projects, onAdd, onClose }: AddTask
                   value={project}
                   onChange={(e) => setProject(e.target.value)}
                   className={inputClass}
+                  disabled={isProjectLocked}
                 >
                   {projects.map((p) => (
                     <option key={p.id} value={p.id}>
@@ -121,6 +150,11 @@ export default function AddTaskModal({ open, projects, onAdd, onClose }: AddTask
                     </option>
                   ))}
                 </select>
+                {isProjectLocked && (
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    Task will be added to the currently open project.
+                  </p>
+                )}
               </div>
               <div>
                 <label className={labelClass}>Time Estimate</label>
@@ -158,17 +192,17 @@ export default function AddTaskModal({ open, projects, onAdd, onClose }: AddTask
                   <option value="done">Done</option>
                 </select>
               </div>
-              <div className="rt:flex rt:justify-end rt:gap-2 rt:pt-2">
+              <div className="flex justify-end gap-2 pt-2">
                 <button
                   type="button"
                   onClick={onClose}
-                  className="rt:px-4 rt:py-2 rt:text-sm rt:text-zinc-300 rt:hover:bg-zinc-800 rt:rounded-md"
+                  className="px-4 py-2 text-sm text-muted-foreground hover:bg-muted rounded-md"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="rt:px-4 rt:py-2 rt:text-sm rt:bg-blue-600 rt:text-white rt:hover:bg-blue-700 rt:rounded-md rt:font-medium"
+                  className="px-4 py-2 text-sm bg-primary text-primary-foreground hover:bg-primary/90 rounded-md font-medium"
                 >
                   Add Task
                 </button>

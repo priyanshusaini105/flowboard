@@ -11,16 +11,16 @@ export default function NotificationStack({ notifications, onRemove }: Notificat
   if (notifications.length === 0) return null;
 
   return (
-    <div className="rt:fixed rt:top-4 rt:right-4 rt:z-[200] rt:flex rt:flex-col rt:gap-2">
+    <div className="fixed top-4 right-4 z-[200] flex flex-col gap-2">
       {notifications.map((n) => (
         <div
           key={n.id}
-          className={`rt:px-4 rt:py-2 rt:rounded-lg rt:text-sm rt:font-medium rt:shadow-lg rt:animate-[fadeInUp_0.3s_ease-out] rt:flex rt:items-center rt:gap-2 ${
+          className={`px-4 py-2 rounded-lg text-sm font-medium shadow-lg animate-[fadeInUp_0.3s_ease-out] flex items-center gap-2 ${
             n.type === 'success'
-              ? 'rt:bg-green-600 rt:text-white'
+              ? 'bg-green-600 text-white'
               : n.type === 'error'
-                ? 'rt:bg-red-600 rt:text-white'
-                : 'rt:bg-blue-600 rt:text-white'
+                ? 'bg-red-600 text-white'
+                : 'bg-blue-600 text-white'
           }`}
         >
           <i
@@ -35,9 +35,9 @@ export default function NotificationStack({ notifications, onRemove }: Notificat
           <span>{n.message}</span>
           <button
             onClick={() => onRemove(n.id)}
-            className="rt:ml-2 rt:opacity-70 rt:hover:opacity-100"
+            className="ml-2 opacity-70 hover:opacity-100"
           >
-            <i className="fas fa-times rt:text-xs" />
+            <i className="fas fa-times text-xs" />
           </button>
         </div>
       ))}

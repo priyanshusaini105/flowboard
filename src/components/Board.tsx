@@ -17,7 +17,7 @@ import ThemeToggle from './ThemeToggle';
 import ConfirmDialog from './ConfirmDialog';
 import { SidebarProvider, SidebarInset, SidebarTrigger } from '@/components/ui/sidebar';
 
-export default function Board() {
+function BoardContent() {
   const { notifications, showNotification, removeNotification } = useNotifications();
   const { theme, toggleTheme } = useTheme();
   const board = useKanbanBoard(showNotification);
@@ -286,4 +286,8 @@ export default function Board() {
       <NotificationStack notifications={notifications} onRemove={removeNotification} />
     </SidebarProvider>
   );
+}
+
+export default function Board() {
+  return <BoardContent />;
 }

@@ -2,6 +2,16 @@
 
 A Kanban board application built with Next.js 15, TypeScript, and Tailwind CSS. Features drag-and-drop with optimistic updates and rollback on simulated API failures, dark/light theme toggle, project management, task archiving, and responsive design.
 
+## Screenshots
+
+| Dark Mode | Light Mode |
+| :---: | :---: |
+| <img src="public/screenshots/kanban-dark.png" alt="Dark Mode" /> | <img src="public/screenshots/kanban-light.png" alt="Light Mode" /> |
+
+<p align="center">
+  <img src="public/screenshots/kanban-mobile.png" alt="Mobile View" width="300" />
+</p>
+
 ## Tech Stack
 
 - **Framework**: Next.js 15 (App Router)
